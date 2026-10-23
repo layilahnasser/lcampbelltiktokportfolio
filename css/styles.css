@@ -967,15 +967,10 @@ h1 { text-shadow: -2px 0 var(--tt-cyan), 2px 0 var(--tt-red) !important; }
 .work-label { color: #fff; }
 .h1-sub { text-shadow: none !important; }
 
-/* disclaimer bar: first thing on every page */
-:root { --bar-h: 30px; }
-.tt-disclaimer { position: fixed; z-index: 80; top: 0; left: 0; right: 0; height: var(--bar-h); margin: 0; padding: 0 12px; display: flex; align-items: center; justify-content: center; text-align: center; background: #0b0b0f; border-bottom: 1px solid var(--line); color: #c8cad3; font: 500 0.72rem/1.15 var(--font); overflow: hidden; }
-body { padding-top: var(--bar-h); }
-body[data-page="home"] main { top: var(--bar-h); }
-@media (max-width: 420px) { :root { --bar-h: 38px; } .tt-disclaimer { font-size: 0.68rem; } }
-@media (min-width: 900px) {
-  .tt-nav { top: var(--bar-h); }
-  body[data-page="home"] main { top: var(--bar-h); }
-  body[data-page="home"] .feed { height: calc(100dvh - var(--bar-h)); }
-  .sheet { top: var(--bar-h); height: calc(100dvh - var(--bar-h)); max-height: none; }
-}
+/* one-time disclaimer notice (floats over the page, no layout shift) */
+.tt-disclaimer { position: fixed; z-index: 90; top: 12px; left: 50%; transform: translateX(-50%); width: min(560px, calc(100% - 24px)); display: flex; align-items: center; gap: 8px; padding: 10px 6px 10px 16px; border-radius: 12px; background: #1b1c24; border: 1px solid #3a3d4d; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6); color: #f1f2f6; transition: opacity 0.3s, transform 0.3s; }
+.tt-disclaimer p { margin: 0; flex: 1; font: 500 0.88rem/1.4 var(--font); }
+.tt-disclaimer button { flex: none; width: 44px; height: 44px; display: grid; place-items: center; background: none; border: 0; color: #fff; font-size: 1.1rem; cursor: pointer; border-radius: 8px; }
+.tt-disclaimer button:focus-visible { outline: 3px solid #fff; outline-offset: -2px; }
+.tt-disclaimer.is-out { opacity: 0; transform: translate(-50%, -12px); }
+@media (prefers-reduced-motion: reduce) { .tt-disclaimer { transition: none; } }

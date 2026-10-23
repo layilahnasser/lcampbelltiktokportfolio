@@ -179,13 +179,27 @@
     { href: "about.html", label: "Profile", key: "about", icon: "user" }
   ];
 
+  /* One-time notice: shown the first time someone opens the site in a visit, then not again. */
+  function showDisclaimer() {
+    let seen = false;
+    try { seen = sessionStorage.getItem("tt-disclaimer") === "1"; sessionStorage.setItem("tt-disclaimer", "1"); } catch (e) {}
+    if (seen) return;
+    const bar = document.createElement("div");
+    bar.className = "tt-disclaimer";
+    bar.setAttribute("role", "status");
+    bar.innerHTML = `<p>Visual style inspired by TikTok’s app. Independent project; not affiliated with TikTok.</p><button type="button" aria-label="Dismiss notice">${ICONS.close}</button>`;
+    const off = () => { bar.classList.add("is-out"); setTimeout(() => bar.remove(), 350); };
+    bar.querySelector("button").addEventListener("click", off);
+    document.body.appendChild(bar);
+    setTimeout(off, 9000);
+  }
+
   function renderChrome() {
     const page = document.body.dataset.page;
     const header = document.getElementById("hud");
     if (header) {
       header.innerHTML = `
         <a class="skip" href="#main">Skip to content</a>
-        <p class="tt-disclaimer">Visual style inspired by TikTok’s app. Independent project; not affiliated with TikTok.</p>
         <nav class="tt-nav" aria-label="Main">
           <a class="tt-brand" href="index.html" aria-label="${esc(me.firstName)} ${esc(me.lastName)}, home"><span class="logo-mono" aria-hidden="true">LC</span><span class="tt-brand-name">${esc(me.firstName)} ${esc(me.lastName)}</span></a>
           <ul class="tt-links">
@@ -208,6 +222,7 @@
           </p>
         </div>`;
     }
+    showDisclaimer();
   }
 
   window.LANES = { esc, t, isTodo, plain, img, ballSVG, logo, portrait, ICONS };
