@@ -185,6 +185,7 @@
     if (header) {
       header.innerHTML = `
         <a class="skip" href="#main">Skip to content</a>
+        <p class="tt-disclaimer">Visual style inspired by TikTok’s app. Independent project; not affiliated with TikTok.</p>
         <nav class="tt-nav" aria-label="Main">
           <a class="tt-brand" href="index.html" aria-label="${esc(me.firstName)} ${esc(me.lastName)}, home"><span class="logo-mono" aria-hidden="true">LC</span><span class="tt-brand-name">${esc(me.firstName)} ${esc(me.lastName)}</span></a>
           <ul class="tt-links">
@@ -193,7 +194,6 @@
                 `<li><a href="${n.href}" class="tt-link${n.create ? " tt-link--create" : ""}${page === n.key || (page === "project" && n.key === "work") ? " is-active" : ""}"${page === n.key ? ' aria-current="page"' : ""}><span class="tt-ico">${ICONS[n.icon]}</span><span class="tt-label">${n.label}</span></a></li>`
             ).join("")}
           </ul>
-          <p class="tt-note">Visual style inspired by TikTok’s app. Independent project; not affiliated with TikTok.</p>
         </nav>`;
     }
     const footer = document.getElementById("footer");
