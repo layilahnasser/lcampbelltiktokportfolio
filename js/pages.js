@@ -82,6 +82,7 @@
     home() {
       const IC = window.LANES.ICONS;
       const cover = (p) => (p.hero && (p.hero.src || (p.hero.row && p.hero.row[0] && p.hero.row[0].src))) || "";
+      const first = (x) => { const m = String(plain(x)).match(/^.*?[.!?](\s|$)/); return m ? m[0].trim() : x; };
       const reel = (p, i) => `
         <article class="reel" id="reel-${esc(p.id)}" data-layout="${esc(p.layout || "design")}" data-id="${esc(p.id)}" aria-roledescription="slide" aria-label="${i + 1} of ${P.projects.length}: ${esc(plain(p.title))}">
           ${cover(p) ? `<div class="reel-bg" aria-hidden="true"><img src="${esc(cover(p))}" alt="" ${i ? 'loading="lazy"' : ""}></div>` : ""}
@@ -89,7 +90,7 @@
           <div class="reel-shade" aria-hidden="true"></div>
           <div class="reel-rail">
             <a class="rail-avatar" href="about.html" aria-label="About ${esc(me.firstName)}"><img src="${esc(me.photo)}" alt=""><span class="rail-plus" aria-hidden="true">+</span></a>
-            <button type="button" class="rail-btn" data-act="like" aria-pressed="false" aria-label="Like ${esc(plain(p.title))}">${IC.heart}<span class="rail-n" data-count>${(i * 7 + 12)}</span></button>
+            <button type="button" class="rail-btn" data-act="like" aria-pressed="false" aria-label="Like ${esc(plain(p.title))}">${IC.heart}<span class="rail-n">Like</span></button>
             <button type="button" class="rail-btn" data-act="details" aria-haspopup="dialog" aria-label="Quick summary of ${esc(plain(p.title))}">${IC.comment}<span class="rail-n">Summary</span></button>
             <button type="button" class="rail-btn" data-act="save" aria-pressed="false" aria-label="Save ${esc(plain(p.title))}">${IC.bookmark}<span class="rail-n">Save</span></button>
             <button type="button" class="rail-btn" data-act="share" aria-label="Copy link to ${esc(plain(p.title))}">${IC.share}<span class="rail-n">Share</span></button>
@@ -97,8 +98,8 @@
           <div class="reel-info">
             <p class="reel-user">@${esc(me.firstName.toLowerCase())}${esc(me.lastName.toLowerCase())} <span class="reel-year">· ${esc(p.year || "")}</span></p>
             <h2 class="reel-title"><a href="project.html?p=${esc(p.id)}">${t(p.title)}</a></h2>
-            <p class="reel-cap">${t(p.approach)}</p>
-            <p class="reel-tags">${(p.tags || []).map((x) => `<span>#${esc(x.replace(/[^A-Za-z0-9]+/g, ""))}</span>`).join(" ")}</p>
+            <p class="reel-cap">${t(first(p.approach))}</p>
+            <p class="reel-tags">${(p.tags || []).map((x) => `<span>#${esc(x.split(/[^A-Za-z0-9]+/).filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(""))}</span>`).join(" ")}</p>
             <a class="reel-open" href="project.html?p=${esc(p.id)}">Open case study <span aria-hidden="true">→</span></a>
             <p class="reel-music"><span class="music-ic" aria-hidden="true">${IC.note}</span><span class="music-t"><span>${esc(p.focus)} · ${esc(p.role || "")}</span></span></p>
           </div>
@@ -125,6 +126,23 @@
             </div>
           </section>
           ${P.projects.map(reel).join("")}
+          <section class="reel reel--intro reel--end" data-end aria-label="Get in touch">
+            <div class="intro-card">
+              <p class="intro-title" aria-hidden="true">Let’s work together</p>
+              <h2 class="sr-only">Get in touch</h2>
+              <p class="intro-bio">Thanks for scrolling. I’d love to talk about research and design roles.</p>
+              <div class="end-btns">
+                <a class="reel-open" href="resume.html">Resume</a>
+                ${me.email ? `<a class="reel-open reel-open--alt" href="mailto:${esc(me.email)}">Email me</a>` : ""}
+                ${me.linkedin ? `<a class="reel-open reel-open--alt" href="${esc(me.linkedin)}" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
+              </div>
+              <p class="intro-hint"><a href="work.html" class="end-link">Browse all work</a></p>
+            </div>
+          </section>
+        </div>
+        <div class="feed-arrows">
+          <button type="button" class="feed-arrow" data-dir="-1" aria-label="Previous project">${IC.back}</button>
+          <button type="button" class="feed-arrow" data-dir="1" aria-label="Next project">${IC.back}</button>
         </div>
         <p class="feed-count" id="feed-count" aria-hidden="true"></p>
         <dialog class="sheet" id="sheet" aria-labelledby="sheet-title">
@@ -223,6 +241,7 @@
     },
 
     work() {
+      const cover = (p) => (p.hero && (p.hero.src || (p.hero.row && p.hero.row[0] && p.hero.row[0].src))) || "";
       return `
         <section class="page-head">
           <p class="eyebrow">My Work</p>
@@ -230,50 +249,17 @@
           <p class="lede">Explore my UX research and design work. See how I turn questions into insights and insights into better experiences.</p>
         </section>
         <section class="section" aria-label="Case studies">
-          <h2 class="work-label">Featured projects</h2>
-          <div class="rack rack--featured">
+          <ul class="tiles">
             ${P.projects
-              .slice(0, 3)
               .map(
                 (p, i) => `
-              <a class="rack-card" href="project.html?p=${esc(p.id)}" style="--ball:${esc(p.ballColor)}">
-                <div class="rack-media" aria-hidden="true">${(p.hero?.src || p.hero?.row?.[0]?.src) ? `<img src="${esc(p.hero.src || p.hero.row[0].src)}" alt="" loading="lazy"${(p.hero.row || ["phone", "phones"].includes(p.hero.fit)) ? ' class="rack-img--contain"' : ""}>` : ""}</div>
-                <div class="rack-body">
-                  <div class="rack-head">
-                    <span class="rack-ballwrap" aria-hidden="true"><span class="rack-ball"></span><b class="rack-num">${i + 1}</b></span>
-                    <div>
-                      <p class="rack-lane">Project ${i + 1}${p.year ? " · " + esc(p.year) : ""}</p>
-                      <h3>${t(p.title)}</h3>
-                    </div>
-                  </div>
-                  <p>${t(p.summary || p.subtitle)}</p>
-                  <span class="rack-go">View case study <span aria-hidden="true">→</span></span>
-                </div>
-              </a>`
+              <li><a class="tile" href="project.html?p=${esc(p.id)}">
+                <span class="tile-img" aria-hidden="true">${cover(p) ? `<img src="${esc(cover(p))}" alt="" loading="lazy">` : ""}</span>
+                <span class="tile-meta"><span class="tile-kind">${esc(p.focus)}${p.year ? " · " + esc(p.year) : ""}</span><strong>${t(p.title)}</strong></span>
+              </a></li>`
               )
               .join("")}
-          </div>
-          <h2 class="work-label work-label--more">More research</h2>
-          <div class="work-rows">
-            ${P.projects
-              .slice(3)
-              .map(
-                (p, k) => `
-              <a class="work-row" href="project.html?p=${esc(p.id)}" style="--ball:${esc(p.ballColor)}">
-                <div class="work-row-img" aria-hidden="true">${p.hero?.src ? `<img src="${esc(p.hero.src)}" alt="" loading="lazy">` : ""}</div>
-                <div class="work-row-tx">
-                  <span class="rack-ballwrap" aria-hidden="true"><span class="rack-ball"></span><b class="rack-num">${k + 4}</b></span>
-                  <div>
-                    <p class="rack-lane">Project ${k + 4}${p.year ? " · " + esc(p.year) : ""}</p>
-                    <h3>${t(p.title)}</h3>
-                    <p>${t(p.summary || p.subtitle)}</p>
-                  </div>
-                </div>
-                <span class="work-row-go">View <span aria-hidden="true">→</span></span>
-              </a>`
-              )
-              .join("")}
-          </div>
+          </ul>
         </section>`;
     },
 
@@ -590,14 +576,13 @@
     const likes = store.get("tt-likes"), saves = store.get("tt-saves");
     const say = (m) => { toast.textContent = ""; setTimeout(() => (toast.textContent = m), 30); };
     const byId = (id) => P.projects.find((p) => p.id === id);
-    const reels = () => [...feed.querySelectorAll(".reel[data-id]")].filter((r) => !r.hidden);
+    const reels = () => [...feed.querySelectorAll(".reel")].filter((r) => !r.hidden);
 
     feed.querySelectorAll(".reel[data-id]").forEach((r) => {
       const id = r.dataset.id;
       const like = r.querySelector('[data-act="like"]'), save = r.querySelector('[data-act="save"]');
-      const n = like.querySelector("[data-count]"), base = +n.textContent;
-      const paint = () => {
-        like.setAttribute("aria-pressed", String(!!likes[id])); n.textContent = base + (likes[id] ? 1 : 0);
+            const paint = () => {
+        like.setAttribute("aria-pressed", String(!!likes[id]));
         save.setAttribute("aria-pressed", String(!!saves[id]));
       };
       paint();
@@ -659,6 +644,11 @@
     };
     feed.addEventListener("scroll", () => requestAnimationFrame(upd), { passive: true });
     upd();
+
+    document.querySelectorAll(".feed-arrow").forEach((b) => b.addEventListener("click", () => {
+      const rm = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      feed.scrollBy({ top: +b.dataset.dir * feed.clientHeight, behavior: rm ? "auto" : "smooth" });
+    }));
 
     // keyboard: arrows page the feed
     feed.addEventListener("keydown", (e) => {

@@ -974,3 +974,30 @@ h1 { text-shadow: -2px 0 var(--tt-cyan), 2px 0 var(--tt-red) !important; }
 .tt-disclaimer button:focus-visible { outline: 3px solid #fff; outline-offset: -2px; }
 .tt-disclaimer.is-out { opacity: 0; transform: translate(-50%, -12px); }
 @media (prefers-reduced-motion: reduce) { .tt-disclaimer { transition: none; } }
+
+/* work grid + end reel + feed arrows */
+.tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+@media (min-width: 700px) { .tiles { grid-template-columns: repeat(3, 1fr); gap: 10px; } }
+.tile { position: relative; display: block; aspect-ratio: 3 / 4; border-radius: 8px; overflow: hidden; background: #161823; color: #fff; text-decoration: none; border: 1px solid var(--line); }
+.tile-img { position: absolute; inset: 0; display: grid; place-items: center; background: #0b0b0f; }
+.tile-img::before { content: ""; position: absolute; inset: 0; background: inherit; }
+.tile-img img { position: relative; width: 100%; height: 100%; object-fit: contain; padding: 0 0 70px; }
+.tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.92), rgba(0,0,0,0) 55%); }
+.tile-meta { position: absolute; z-index: 2; left: 10px; right: 10px; bottom: 10px; display: flex; flex-direction: column; gap: 2px; }
+.tile-kind { font: 600 0.74rem var(--font); color: #d0d2da; }
+.tile strong { font: 800 1rem/1.2 var(--font); }
+.tile:hover { border-color: #fff; }
+.tile:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.end-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 0 18px; }
+.reel-open--alt { background: transparent; border: 2px solid #fff; color: #fff; padding: 7px 16px; }
+.reel-open--alt:hover { background: #fff; color: #000; }
+.end-link { color: #fff; font-weight: 700; }
+.feed-arrows { display: none; }
+@media (min-width: 900px) {
+  body[data-page="home"] .feed-arrows { display: flex; flex-direction: column; gap: 10px; position: absolute; right: calc(50% - min(50%, calc((100dvh - var(--bar-h, 0px)) * 0.31)) - 66px); top: 50%; transform: translateY(-50%); }
+  .feed-arrow { width: 48px; height: 48px; border-radius: 50%; border: 0; background: #2a2d3b; color: #fff; font-size: 1.2rem; cursor: pointer; display: grid; place-items: center; }
+  .feed-arrow:hover { background: #3a3d4d; }
+  .feed-arrow:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+  .feed-arrow[data-dir="-1"] .ic { transform: rotate(90deg); }
+  .feed-arrow[data-dir="1"] .ic { transform: rotate(-90deg); }
+}
