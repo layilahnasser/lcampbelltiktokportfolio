@@ -9,7 +9,7 @@ A static portfolio site with five case studies, an About page, a Resume page, an
 ## Publish it with GitHub Pages
 1. Push the files to the root of the repository (the `main` branch).
 2. In **Settings → Pages**, choose **Deploy from a branch**, select **main** and the **/ (root)** folder, and save.
-3. The site appears at `https://layilahnasser.github.io/tiktokportfolio/` after a minute or two.
+3. The site appears at `https://layilahnasser.github.io/lcampbelltiktokportfolio/` after a minute or two.
 
 If the live address is different, update the `og:image` links in the six `.html` files so link previews show the share image.
 
