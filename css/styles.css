@@ -1007,3 +1007,12 @@ h1 { text-shadow: -2px 0 var(--tt-cyan), 2px 0 var(--tt-red) !important; }
 /* link to the standard portfolio */
 .tt-std { display: none; }
 @media (min-width: 900px) { .tt-std { display: flex; align-items: center; justify-content: center; gap: 6px; margin: auto 8px 4px; min-height: 46px; padding: 0 16px; border-radius: 10px; border: 1px solid #3a3d4d; color: #fff; font: 700 .95rem var(--font); text-decoration: none; } .tt-std:hover { background: #1b1c24; border-color: #fff; } .tt-std:focus-visible { outline: 3px solid #fff; outline-offset: 2px; } }
+
+/* desktop: Contact is a plain tab like the others; only the current page is highlighted */
+@media (min-width: 900px) {
+  .tt-link--create { margin-top: 0; background: transparent; color: #b4b6c0 !important; justify-content: flex-start; }
+  .tt-link--create:hover { background: #1b1c24; color: #fff !important; }
+  .tt-link--create.is-active { color: var(--tt-red) !important; }
+  .tt-link--create .tt-ico { display: grid; width: 30px; height: auto; border-radius: 0; background: none; box-shadow: none; color: inherit; font-size: 1.6rem; }
+  .tt-link--create .tt-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
+}
