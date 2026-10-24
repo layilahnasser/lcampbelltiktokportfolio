@@ -208,8 +208,7 @@
                 `<li><a href="${n.href}" class="tt-link${n.create ? " tt-link--create" : ""}${page === n.key || (page === "project" && n.key === "work") ? " is-active" : ""}"${page === n.key ? ' aria-current="page"' : ""}><span class="tt-ico">${ICONS[n.icon]}</span><span class="tt-label">${n.label}</span></a></li>`
             ).join("")}
           </ul>
-          <p class="tt-built"><span aria-hidden="true">✦</span> <b>Built with Claude Code</b><small>Designed by me. Claude Code wrote the code.</small></p>
-          <a class="tt-std" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio <span aria-hidden="true">↗</span></a>
+<a class="tt-std" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio <span aria-hidden="true">↗</span></a>
         </nav>`;
     }
     const footer = document.getElementById("footer");
