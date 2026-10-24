@@ -136,7 +136,8 @@
                 <a class="reel-open" href="resume.html">Resume</a>
                 ${me.email ? `<a class="reel-open reel-open--alt" href="mailto:${esc(me.email)}">Email me</a>` : ""}
                 ${me.linkedin ? `<a class="reel-open reel-open--alt" href="${esc(me.linkedin)}" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
-              </div>
+              
+                <a class="reel-open reel-open--alt" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio<span class="sr-only"> (opens my standard portfolio)</span></a></div>
               <p class="intro-hint"><a href="work.html" class="end-link">Browse all work</a></p>
             </div>
           </section>
@@ -275,7 +276,7 @@
         <section class="page-head page-head--row">
           <div>
             <p class="eyebrow">Resume</p>
-            <h1>Career scorecard</h1>
+            <h1>Resume</h1>
             <p class="lede">${t(R.summary)}</p>
           </div>
           <a class="btn btn--pink" href="${esc(me.resumePdf)}" download>Download PDF</a>
