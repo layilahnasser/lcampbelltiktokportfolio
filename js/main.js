@@ -208,6 +208,7 @@
                 `<li><a href="${n.href}" class="tt-link${n.create ? " tt-link--create" : ""}${page === n.key || (page === "project" && n.key === "work") ? " is-active" : ""}"${page === n.key ? ' aria-current="page"' : ""}><span class="tt-ico">${ICONS[n.icon]}</span><span class="tt-label">${n.label}</span></a></li>`
             ).join("")}
           </ul>
+          <p class="tt-built"><span aria-hidden="true">✦</span> <b>Built with Claude Code</b><small>Designed by me. Claude Code wrote the code.</small></p>
           <a class="tt-std" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio <span aria-hidden="true">↗</span></a>
         </nav>`;
     }
@@ -215,7 +216,7 @@
     if (footer) {
       footer.innerHTML = page === "home" ? "" : `
         <div class="footer-inner">
-          <p>Designed &amp; built by ${esc(me.firstName)} ${esc(me.lastName)}. Visual style inspired by TikTok’s app; this is an independent project and is not affiliated with TikTok.</p>
+          <p>Designed by ${esc(me.firstName)} ${esc(me.lastName)}. Built with Claude Code. Visual style inspired by TikTok’s app; this is an independent project and is not affiliated with TikTok.</p>
           <p class="footer-links">
             ${me.email ? `<a href="mailto:${esc(me.email)}">Email</a>` : ""}
             ${me.linkedin ? `<a href="${esc(me.linkedin)}" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>` : ""}

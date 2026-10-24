@@ -1016,3 +1016,12 @@ h1 { text-shadow: -2px 0 var(--tt-cyan), 2px 0 var(--tt-red) !important; }
   .tt-link--create .tt-ico { display: grid; width: 30px; height: auto; border-radius: 0; background: none; box-shadow: none; color: inherit; font-size: 1.6rem; }
   .tt-link--create .tt-label { position: static; width: auto; height: auto; overflow: visible; clip: auto; }
 }
+
+.intro-built { margin: 0 auto 18px; max-width: 360px; padding: 10px 14px; border-radius: 12px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); color: #e8e9ef; font: 500 .9rem/1.45 var(--font); text-align: left; } .intro-built span { color: var(--tt-cyan); margin-right: 6px; } .intro-built b { color: #fff; }
+
+/* visible "built with Claude Code" badges */
+.intro-built { display: flex; align-items: center; gap: 12px; margin: 4px auto 16px; max-width: 380px; padding: 12px 16px; border-radius: 14px; text-align: left; color: #fff; font: 500 .98rem/1.4 var(--font); background: linear-gradient(#14151d, #14151d) padding-box, linear-gradient(90deg, var(--tt-cyan), var(--tt-red)) border-box; border: 2px solid transparent; box-shadow: 0 0 24px rgba(37,244,238,.18), 0 0 24px rgba(254,44,85,.14); }
+.intro-built b { color: #fff; font-weight: 800; } .ib-spark { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #fff; color: #000; font-size: 1rem; }
+.tt-built { display: none; }
+@media (min-width: 900px) { .tt-built { display: block; margin: auto 8px 12px; padding: 12px 14px; border-radius: 12px; font: 500 .85rem/1.35 var(--font); color: #e8e9ef; background: linear-gradient(#14151d, #14151d) padding-box, linear-gradient(90deg, var(--tt-cyan), var(--tt-red)) border-box; border: 2px solid transparent; } .tt-built span { color: var(--tt-cyan); } .tt-built b { color: #fff; font-size: .95rem; } .tt-built small { display: block; margin-top: 3px; color: #c4c6d0; font-size: .8rem; } .tt-std { margin-top: 0; } }
+.intro-built span:not(.ib-spark) { color: #fff; margin: 0; }
