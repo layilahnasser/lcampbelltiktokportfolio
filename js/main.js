@@ -215,7 +215,7 @@
     if (footer) {
       footer.innerHTML = page === "home" ? "" : `
         <div class="footer-inner">
-          <p>Designed by ${esc(me.firstName)} ${esc(me.lastName)}. Vibe coded through the support of Claude Code. Visual style inspired by TikTok’s app; this is an independent project and is not affiliated with TikTok.</p>
+          <p>Designed by ${esc(me.firstName)} ${esc(me.lastName)}. Built with Claude Code. Visual style inspired by TikTok’s app; this is an independent project and is not affiliated with TikTok.</p>
           <p class="footer-links">
             ${me.email ? `<a href="mailto:${esc(me.email)}">Email</a>` : ""}
             ${me.linkedin ? `<a href="${esc(me.linkedin)}" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
