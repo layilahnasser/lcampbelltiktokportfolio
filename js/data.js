@@ -97,7 +97,7 @@ window.PORTFOLIO = {
     toolsHeading: "How I turn insight into product direction",
     tools: [
       "Figma", "Miro", "Adobe Photoshop",
-      "Claude", "ChatGPT", "Copilot", "Gemini", "Lovable",
+      "Claude", "ChatGPT", "Copilot", "Gemini", "Claude Code",
       "VS Code", "Python", "R", "HTML", "CSS",
       "NVivo", "Lookback", "User Interviews"
     ],
@@ -194,7 +194,7 @@ window.PORTFOLIO = {
       team: "2 designers\nMicaela Ciambrone & Layilah Campbell",
       timeline: "Jan–Mar 2026",
       toolsLabel: "Methods & deliverables",
-      tools: "Competitive analysis · Wireframes\nComponent library · Visual identity",
+      tools: "Competitive analysis · Figma wireframes\nComponent library · Visual identity",
       iterLabels: ["What changed", "How I checked it"],
       hero: { src: "assets/img/milk-homepage.jpg", caption: "The redesigned homepage: an image-forward hero for the season’s flavors." },
 
@@ -381,7 +381,7 @@ window.PORTFOLIO = {
       focus: "Retention research",
       approach: "Completed the full research cycle to explore customer retention, from interviews and usability testing to synthesis and 15 retention concepts.",
       summary: "Improving retention for 500,000+ policyholders while empowering CS agents with the tools and insights to better support customers.",
-      glance: { problem: "Customers leave Root, and the teams who could keep them lacked a clear picture of why.", did: "12 stakeholder and 6 customer interviews, affinity mapping, desk research reports, and live usability testing.", changed: "15 net-new retention concepts, shared out to leadership. Used Lovable to host the research repository.", role: "UX Research Intern. I wrote the research plan, moderated customer interviews, synthesized findings, and presented readouts, with a product design intern." },
+      glance: { problem: "Customers leave Root, and the teams who could keep them lacked a clear picture of why.", did: "12 stakeholder and 6 customer interviews, affinity mapping, desk research reports, and live usability testing.", changed: "15 net-new retention concepts, shared out to leadership. Built a centralized research repository with Claude Code.", role: "UX Research Intern. I wrote the research plan, moderated customer interviews, synthesized findings, and presented readouts, with a product design intern." },
       ballColor: "#ff7a45",
       year: "2026",
       tags: ["Mixed-methods", "Journey maps", "Retention"],
@@ -500,7 +500,7 @@ window.PORTFOLIO = {
           { value: "15", label: "net-new retention concepts" },
           { value: "7", label: "insights posts shared" }
         ],
-        reflection: "All of the project’s goals were met. If I were to do it again, I’d prepare more thoroughly for unexpected issues during live sessions. When Lookback experienced an outage, I kept usability testing on track by switching to Google Meet. Although I received positive feedback on how I handled the disruption, I’d prefer to have a backup plan ready. Next time, I’d include backup video links in calendar invites and run a second recording tool locally. I’m also interested in tracking the long-term impact of the CS script updates and using Lovable to support consistent implementation."
+        reflection: "All of the project’s goals were met. If I were to do it again, I’d prepare more thoroughly for unexpected issues during live sessions. When Lookback experienced an outage, I kept usability testing on track by switching to Google Meet. Although I received positive feedback on how I handled the disruption, I’d prefer to have a backup plan ready. Next time, I’d include backup video links in calendar invites and run a second recording tool locally. I’m also interested in tracking the long-term impact of the CS script updates and using Claude Code to support consistent implementation."
       }
     },
 
@@ -1039,25 +1039,25 @@ window.PORTFOLIO = {
             ]
           },
           {
+            role: "UX Designer",
+            org: "Milk & Froth Website Redesign",
+            dates: "Jan 2026 – Mar 2026",
+            points: [
+              "Audited the brand’s homepage, About, and Find Pints pages and ran a competitive analysis of two local and two national ice cream brands across eight website features, such as online ordering, search, and store locator.",
+              "Built the brand’s design system from the ground up in Figma, including color tokens, a type scale, buttons, and a component library, before designing any pages.",
+              "Designed the location, e-commerce, and 404 pages in Figma and supported the rest of the site as one of two designers, delivering a responsive redesign for desktop and mobile.",
+              "Mapped five pages in Figma wireframes with a shared header and footer and developed the visual identity for the brand."
+            ]
+          },
+          {
             role: "UX Researcher",
             org: "Instructure · Ann Arbor, MI",
             dates: "Aug 2025 – Dec 2025",
             points: [
-              "Built a case for the creation of ElevateED through UX research, a strategic AI-powered initiative advancing Instructure’s expansion into inclusive, alternative education pathways.",
+              "Built the case for ElevateED through UX research and AI-assisted prototyping in Figma Make, proposing inclusive, alternative education pathways to support Instructure’s expansion.",
               "Conducted stakeholder interviews, analyzed needs, and synthesized qualitative data to identify barriers in access, credentialing, and user experience for non-traditional learners.",
               "Collaborated cross-functionally with researchers, designers, and organization stakeholders to develop prototypes, affinity walls, and actionable design recommendations presented to over 180 students and corporate employees.",
               "Presented final deliverables to all stakeholders, including high-fidelity wireframes, to drive alignment with Instructure’s long-term strategic goals amid the rapidly evolving EdTech landscape."
-            ]
-          },
-          {
-            role: "UX Designer and Researcher",
-            org: "Robin Nest · Ann Arbor, MI",
-            dates: "Aug 2025 – Nov 2025",
-            points: [
-              "Designed and iterated user flows for Robin Nest, an AI-driven app that connects cancer patients with meal planning services, resources, and support tools.",
-              "Conducted user research, including creating user personas, journey mapping, interviews, surveys, and usability testing, to ensure the app meets the nutritional needs of patients.",
-              "Collaborated with a diverse team of analysts, information architects, and product managers to align design decisions with ethical and therapeutic goals.",
-              "Built wireframes and prototypes that prioritize accessibility, trust, and ease of use for patients navigating the meal planning tool."
             ]
           },
           {
@@ -1085,7 +1085,8 @@ window.PORTFOLIO = {
               "Executed an end-to-end mixed-methods research strategy across 18 sessions, including 12 internal stakeholder interviews and 6 competitor policyholder interviews conducted via User Interviews and Lookback across key competitor cohorts.",
               "Evaluating Lookback session recordings via thematic coding and affinity mapping to create high-fidelity Customer Journey Maps, DIG-based personas, and a prioritized Retention Levers Matrix.",
               "Delivered three executive research readouts to cross-functional stakeholders, including the Director of Design and SVP of Product, presenting research progress, emerging insights, and strategic recommendations to align leadership on retention opportunities and product direction.",
-              "Translated research insights into 15 net-new retention concepts in Figma, developing high-fidelity experience recommendations that addressed identified churn drivers and gave Product stakeholders tangible, research-backed opportunities for improving policyholder retention."
+              "Translated research insights into 15 net-new retention concepts in Figma, developing high-fidelity experience recommendations that addressed identified churn drivers and gave Product stakeholders tangible, research-backed opportunities for improving policyholder retention.",
+              "Built a centralized research repository using Claude Code’s AI-powered development tools, enabling teams across the company to access user insights and inform product decisions."
             ]
           },
           {
@@ -1097,7 +1098,8 @@ window.PORTFOLIO = {
               "Execute Round 2 qualitative coding of staff interviews and field notes using a standardized research protocol, identifying patterns related to digital access, healthcare equity, patient experience, and “Remote by Default” primary care.",
               "Perform transcript verification and de-identification across sensitive healthcare research data, strengthening data accuracy, participant confidentiality, and research integrity prior to formal analysis.",
               "Apply structured codebooks and qualitative coding frameworks across 2 primary research data sources, interviews and ethnographic field notes, documenting coding decisions to improve consistency and reliability across researchers.",
-              "Analyze evidence from a 48-interview research corpus to surface barriers and disparities in technology-enabled healthcare access, contributing qualitative findings to a broader mixed-methods research study and future academic publication."
+              "Analyze evidence from a 48-interview research corpus to surface barriers and disparities in technology-enabled healthcare access, contributing qualitative findings to a broader mixed-methods research study and future academic publication.",
+              "Used ChatGPT to analyze and summarize relevant published research on technology-enabled healthcare access, identifying key themes to support the study’s research context."
             ]
           },
           {

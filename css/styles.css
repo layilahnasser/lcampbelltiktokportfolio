@@ -1001,3 +1001,4 @@ h1 { text-shadow: -2px 0 var(--tt-cyan), 2px 0 var(--tt-red) !important; }
   .feed-arrow[data-dir="-1"] .ic { transform: rotate(90deg); }
   .feed-arrow[data-dir="1"] .ic { transform: rotate(-90deg); }
 }
+.case-hero .shot--hero img { max-height: 520px; width: 100%; object-fit: contain; background: #0e0f16; }
