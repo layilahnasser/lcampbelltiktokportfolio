@@ -3,6 +3,7 @@
   const P = window.PORTFOLIO;
   const me = P.profile;
   const { esc, t, isTodo, plain, img, ballSVG, logo, portrait } = window.LANES;
+  const INL = window.INLINE || { logos: {} };
   const main = document.getElementById("main");
   const page = document.body.dataset.page;
 
@@ -120,7 +121,7 @@
               <img class="intro-photo" src="${esc(me.photo)}" alt="${esc(me.photoAlt)}">
               <p class="intro-user">@${esc(me.firstName.toLowerCase())}${esc(me.lastName.toLowerCase())}</p>
               <p class="intro-title" aria-hidden="true">${esc(me.heroTitle)}</p>
-              <p class="intro-bio">${esc(me.headline)}</p>
+              <p class="intro-bio">${esc(me.headline).replace("Google, Adobe &amp; Meta", `<span class="lg"><img src="${INL.logos.google}" alt="Google"></span><span class="lg"><img src="${INL.logos.adobe}" alt="Adobe"></span><span class="lg"><img src="${INL.logos.meta}" alt="Meta"></span>`)}</p>
               <dl class="intro-stats">${(me.stats || []).map((x) => `<div><dd>${esc(x.value === "projects" ? P.projects.length : x.value)}</dd><dt>${esc(x.label)}</dt></div>`).join("")}</dl>
               <p class="intro-hint">Swipe up for my projects <span aria-hidden="true">↑</span></p>
             </div>
