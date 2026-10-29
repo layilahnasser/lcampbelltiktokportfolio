@@ -704,7 +704,7 @@
     }
     // Make the details easy to find: say what is inside, open the process frames, and offer expand/collapse all.
     const hints = { problem: "how I identified it and the goal", research: "every method and the key insights", methods: "every method and why I chose it", define: "who we designed for and what it means", ideate: "the thinking behind the wireframes", iterate: "each round, what changed and how I checked it", execution: "the full build notes", objectives: "the full objectives and questions", findings: "the full findings and evidence", insights: "the patterns and what they mean", recommendations: "the full recommendations and evidence", impact: "the decisions this influenced and my reflection" };
-    const open = new Set(["research", "methods", "iterate", "ideate"]);
+    const open = new Set();
     const lab = (d, on) => { const sm = d.querySelector("summary"); const id = d.closest(".frame") && d.closest(".frame").id; const h = hints[id]; sm.textContent = on ? "Hide the details" : "Read the details" + (h ? ": " + h : ""); };
     document.querySelectorAll(".frame details.more:not(.fold)").forEach((d) => {
       const id = d.closest(".frame").id;
