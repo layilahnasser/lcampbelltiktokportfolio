@@ -527,19 +527,16 @@
                 <h1>${t(p.title)}</h1>
                 <p class="lede">${t(p.subtitle)}</p>
                 ${p.intro ? `<p class="case-intro">${t(p.intro)}</p>` : ""}
+                <p class="meta-line">${[p.role, p.team, p.timeline].filter(Boolean).map((x) => `<span>${String(x).split("\n").map((l) => t(l)).join(", ")}</span>`).join("")}</p>
+                ${!isResearch && p.tools ? `<p class="meta-sub"><b>${esc(p.toolsLabel || "Tools & methods")}:</b> ${String(p.tools).split("\n").map((l) => t(l)).join(" · ")}</p>` : ""}
               </div>
             </div>
-            <dl class="case-meta">
-              <div><dt>Role</dt><dd>${t(p.role)}</dd></div>
-              <div><dt>Team</dt><dd>${String(p.team).split("\n").map((l) => t(l)).join("<br>")}</dd></div>
-              <div><dt>Timeline</dt><dd>${t(p.timeline)}</dd></div>
-              <div><dt>${esc(p.toolsLabel || "Tools & methods")}</dt><dd>${String(p.tools).split("\n").map((l) => t(l)).join("<br>")}</dd></div>
-            </dl>
+            
             ${p.glance ? `<ul class="glance-boxes" aria-label="Case study at a glance">${[["Problem", p.glance.problem], ["What I did", p.glance.did], ["What changed", p.glance.changed]].map(([k, v]) => `<li><b>${k}</b><span>${t(v)}</span></li>`).join("")}</ul>` : ""}
-            <div class="expand-bar"><p>Skim the summaries, or open every section to see the methods, evidence, and reasons behind them.</p><button type="button" class="expand-all" aria-pressed="false">Open all details</button></div>
             ${img(p.hero, "shot--hero" + (p.hero && p.hero.fit === "phone" ? " shot--phone" : ""))}
           </header>
 
+          <div class="expand-row"><button type="button" class="expand-all" aria-pressed="false">Open all details</button></div>
           <nav class="fstrip-nav" aria-label="Case study frames">
             <ol class="fstrip">${FRAMES.map((f, i) => `<li class="fcell"><a href="#${f.key}" data-frame="${f.key}"><span class="fn">${i + 1}<span class="fl"> ${f.label}</span></span><span class="fm" aria-hidden="true"></span><span class="sr-only fstate"></span></a></li>`).join("")}</ol>
           </nav>
@@ -666,11 +663,50 @@
   }
 
   if (page === "project") {
+    // Research case studies: fold seven steps into five and tuck long evidence under "Show more" folds.
+    const fold = (nodes, label) => {
+      nodes = nodes.filter(Boolean); if (!nodes.length) return null;
+      const d = document.createElement("details"); d.className = "more fold";
+      const sm = document.createElement("summary"); sm.textContent = label;
+      const body = document.createElement("div"); body.className = "more-body";
+      nodes[0].before(d); d.append(sm, body); nodes.forEach((n) => body.appendChild(n)); return d;
+    };
+    const foldList = (list, keep, noun) => {
+      if (!list || list.children.length <= keep) return;
+      const extra = document.createElement(list.tagName); extra.className = list.className;
+      [...list.children].slice(keep).forEach((li) => extra.appendChild(li));
+      list.after(extra); fold([extra], `Show ${extra.children.length} more ${extra.children.length === 1 ? noun.replace(/s$/, "") : noun}`);
+    };
+    const byId = (id) => document.getElementById(id);
+    if (byId("objectives") && byId("insights")) {
+      const prob = byId("problem"), obj = byId("objectives"), fnd = byId("findings"), ins = byId("insights");
+      const grid = obj.querySelector(".obj-grid");
+      [...obj.children].filter((c) => !c.classList.contains("frame-head")).forEach((c) => prob.appendChild(c));
+      fold([grid], "The research questions");
+      obj.remove();
+      const figs = [...document.querySelectorAll("#methods figure")];
+      if (figs.length > 2) fold(figs.slice(2), `See ${figs.length - 2} more working artifacts`);
+      const h = document.createElement("h3"); h.className = "fold-h"; h.textContent = "What it meant"; fnd.appendChild(h);
+      const rest = [...ins.children].filter((c) => !c.classList.contains("frame-head"));
+      rest.forEach((c) => fnd.appendChild(c));
+      const tail = rest.filter((c) => !c.classList.contains("glance") && !c.classList.contains("chips"));
+      fold(tail, "The patterns, how-might-we questions, and the evidence behind them");
+      ins.remove();
+      foldList(document.querySelector("#findings ul.insights"), 3, "findings");
+      foldList(document.querySelector("#impact ol.strikes"), 3, "outcomes");
+      document.querySelectorAll(".frame-head .frame-no").forEach((el, i) => { el.textContent = "Step " + (i + 1); });
+      const strip = document.querySelector(".fstrip");
+      if (strip) {
+        [...strip.children].forEach((li) => { if (["objectives", "insights"].includes((li.querySelector("a") || {}).dataset.frame)) li.remove(); });
+        strip.style.gridTemplateColumns = `repeat(${strip.children.length}, 1fr)`;
+        [...strip.querySelectorAll(".fn")].forEach((fn, i) => { fn.firstChild.textContent = String(i + 1); });
+      }
+    }
     // Make the details easy to find: say what is inside, open the process frames, and offer expand/collapse all.
     const hints = { problem: "how I identified it and the goal", research: "every method and the key insights", methods: "every method and why I chose it", define: "who we designed for and what it means", ideate: "the thinking behind the wireframes", iterate: "each round, what changed and how I checked it", execution: "the full build notes", objectives: "the full objectives and questions", findings: "the full findings and evidence", insights: "the patterns and what they mean", recommendations: "the full recommendations and evidence", impact: "the decisions this influenced and my reflection" };
     const open = new Set(["research", "methods", "iterate", "ideate"]);
     const lab = (d, on) => { const sm = d.querySelector("summary"); const id = d.closest(".frame") && d.closest(".frame").id; const h = hints[id]; sm.textContent = on ? "Hide the details" : "Read the details" + (h ? ": " + h : ""); };
-    document.querySelectorAll(".frame details.more").forEach((d) => {
+    document.querySelectorAll(".frame details.more:not(.fold)").forEach((d) => {
       const id = d.closest(".frame").id;
       if (open.has(id)) d.open = true;
       lab(d, d.open);
