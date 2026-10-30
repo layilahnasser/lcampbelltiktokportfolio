@@ -349,6 +349,7 @@
           ? `<div class="decision-grid">${items.map((d, i) => `<div class="decision"><span class="card-num">0${i + 1}</span><h4>${t(d.title)}</h4><p>${t(d.why)}</p></div>`).join("")}</div>`
           : "";
       /* Concise, screenshot-led research layout: one line + chips + images up top, full write-up folded under "Read the details". */
+      const full = (x) => String(x || "").split(/(?<=[.?!])\s+/).filter((z) => z && !/\bbelow\b|end of this case study|at the end/i.test(z)).join(" ");
       const first = (x) => String(x || "").split(/(?<=[.?!])\s+/)[0];
       const rest = (x) => String(x || "").split(/(?<=[.?!])\s+/).slice(1).join(" ");
       const rp = (x) => (rest(x) ? `<p>${t(rest(x))}</p>` : "");
@@ -389,20 +390,20 @@
 
               <section id="objectives" class="frame">
                 ${frameHead(2, FRAMES[1].label)}
-                <p class="glance">${t(first(p.objectives.summary))}</p>
+                <p class="glance">${t(full(p.objectives.summary))}</p>
                 <ol class="obj-grid${p.objectives.items.length === 3 ? " obj-grid--three" : ""}">${p.objectives.items.map((x, i) => `<li><span class="card-num">0${i + 1}</span>${typeof x === "string" ? t(x) : `<strong class="obj-title">${t(x.title)}</strong><span class="obj-text">${t(x.text)}</span>`}</li>`).join("")}</ol>
               </section>
 
               <section id="methods" class="frame">
                 ${frameHead(3, FRAMES[2].label)}
-                <p class="glance">${t(first(p.methods.summary))}</p>
+                <p class="glance">${t(full(p.methods.summary))}</p>
                 ${artifacts(p.methods.image, p.id)}
                 ${more(`<div class="method-grid">${p.methods.items.map((m) => `<div class="method"><h3>${t(m.name)}</h3><p>${t(m.detail)}</p></div>`).join("")}</div>`)}
               </section>
 
               <section id="findings" class="frame">
                 ${frameHead(4, FRAMES[3].label)}
-                <p class="glance">${t(first(p.findings.summary))}</p>
+                <p class="glance">${t(full(p.findings.summary))}</p>
                 ${p.findings.callout ? `<p class="callout">${t(p.findings.callout)}</p>` : ""}
                 ${grid(p.findings.image)}
                 ${more(`${rp(p.findings.summary)}<h3>What we observed</h3><ol class="insights">${p.findings.items.map((x) => `<li>${t(x)}</li>`).join("")}</ol>`)}
@@ -410,7 +411,7 @@
 
               <section id="insights" class="frame">
                 ${frameHead(5, FRAMES[4].label)}
-                <p class="glance">${t(first(p.insights.summary))}</p>
+                <p class="glance">${t(full(p.insights.summary))}</p>
                 ${chips(((p.insights.lists || [])[0] || { items: [] }).items.map(first))}
                 ${grid(p.insights.image)}
                 ${more(`${rp(p.insights.summary)}${listsBlock(p.insights.lists)}`)}
@@ -418,7 +419,7 @@
 
               <section id="recommendations" class="frame">
                 ${frameHead(6, FRAMES[5].label)}
-                <p class="glance">${t(first(rec.summary))}</p>
+                <p class="glance">${t(full(rec.summary))}</p>
                 ${designs.length ? `<div class="concept-grid">${designs.join("")}</div>` : ""}
                 ${grid(rec.image)}
                 ${more(`${mapBlock(rec.map)}`)}
@@ -477,7 +478,7 @@
 
               <section id="research" class="frame">
                 ${frameHead(2, FRAMES[1].label)}
-                ${ok(p.research.summary) ? `<p class="glance">${t(first(p.research.summary))}</p>` : ""}
+                ${ok(p.research.summary) ? `<p class="glance">${t(full(p.research.summary))}</p>` : ""}
                 ${p.id === "crown-code" ? "" : chips(rMethods.map((m) => m.name))}
                 ${p.research.competitors ? (() => { const k = p.research.competitors; const mark = (v) => (v ? `<span aria-hidden="true">\u2713</span><span class="sr-only">Yes</span>` : `<span aria-hidden="true">\u2013</span><span class="sr-only">No</span>`); return `<div class="comp"><h3>${esc(k.heading)}</h3><p class="glance">${t(k.intro)}</p><div class="comp-wrap" tabindex="0" role="region" aria-label="${esc(k.matrixHeading)} table, scrolls sideways on small screens"><table class="comp-table"><caption>${esc(k.matrixHeading)}</caption><thead><tr><th scope="col"><span class="sr-only">Feature</span></th>${k.cols.map((c, i) => `<th scope="col"${i === k.cols.length - 1 ? ' class="comp-us"' : ""}>${esc(c)}</th>`).join("")}</tr></thead><tbody>${k.rows.map((r) => `<tr><th scope="row">${esc(r.label)}</th>${r.has.map((v, i) => `<td class="${v ? "yes" : "no"}${i === r.has.length - 1 ? " comp-us" : ""}">${mark(v)}</td>`).join("")}</tr>`).join("")}</tbody></table></div><div class="contrib"><b>Crown Code differentiator</b><p>${t(k.differentiator)}</p></div></div>`; })() : ""}
                 ${grid(p.research.image)}
@@ -493,7 +494,7 @@
 
               <section id="ideate" class="frame">
                 ${frameHead(4, FRAMES[3].label)}
-                ${ok(p.ideate.summary) ? `<p class="glance">${t(first(p.ideate.summary))}</p>` : ""}
+                ${ok(p.ideate.summary) ? `<p class="glance">${t(full(p.ideate.summary))}</p>` : ""}
                 ${p.ideate.callout ? `<p class="callout">${t(p.ideate.callout)}</p>` : ""}
                 ${grid(p.ideate.image)}
                 ${more(`${ok(p.ideate.summary) ? rp(p.ideate.summary) : ""}${listsBlock(p.ideate.lists)}`)}
@@ -507,7 +508,7 @@
 
               <section id="execution" class="frame">
                 ${frameHead(6, FRAMES[5].label)}
-                ${ok(ex.summary) ? `<p class="glance">${t(first(ex.summary))}</p>` : ""}
+                ${ok(ex.summary) ? `<p class="glance">${t(full(ex.summary))}</p>` : ""}
                 ${(ex.newPages || []).length ? `<h3>${esc(ex.newPagesHeading || "New pages")}</h3>${ex.newPagesNote ? `<p>${t(ex.newPagesNote)}</p>` : ""}<ul class="chips" role="list">${ex.newPages.map((n) => `<li class="chip"><span class="frame-no">New</span> ${esc(n)}</li>`).join("")}</ul>` : ""}
                 ${(ex.designs || []).length && (ex.darkMode || (ex.darkScreens || []).length) ? `<h3 class="mode-h">Light mode</h3>` : ""}
                 ${(ex.designs || []).length ? `<div class="design-grid">${(ex.designs || []).map((d) => d.phones ? `<article class="design-cell design-cell--phones"><h3 class="design-label">${d.isNew ? `<span class="frame-no">New</span> ` : ""}${esc(d.label)}</h3>${img({ row: d.images })}</article>` : `<article class="design-cell"><h3 class="design-label">${d.isNew ? `<span class="frame-no">New</span> ` : ""}${esc(d.label)}</h3>${imgs(d.images)}</article>`).join("")}</div><p class="hint">Tap a screen to open it full size.</p>` : ""}
