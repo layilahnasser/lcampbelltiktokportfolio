@@ -536,7 +536,6 @@
             ${img(p.hero, "shot--hero" + (p.hero && p.hero.fit === "phone" ? " shot--phone" : ""))}
           </header>
 
-          <div class="expand-row"><button type="button" class="expand-all" aria-pressed="false">Open all details</button></div>
           <nav class="fstrip-nav" aria-label="Case study frames">
             <ol class="fstrip">${FRAMES.map((f, i) => `<li class="fcell"><a href="#${f.key}" data-frame="${f.key}"><span class="fn">${i + 1}<span class="fl"> ${f.label}</span></span><span class="fm" aria-hidden="true"></span><span class="sr-only fstate"></span></a></li>`).join("")}</ol>
           </nav>
