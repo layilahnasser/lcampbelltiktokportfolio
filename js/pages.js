@@ -686,10 +686,9 @@
       const figs = [...document.querySelectorAll("#methods figure")];
       if (figs.length > 2) fold(figs.slice(2));
       const h = document.createElement("h3"); h.className = "fold-h"; h.textContent = "What it meant"; fnd.appendChild(h);
-      const rest = [...ins.children].filter((c) => !c.classList.contains("frame-head"));
-      rest.forEach((c) => fnd.appendChild(c));
-      const tail = rest.filter((c) => !c.classList.contains("glance") && !c.classList.contains("chips"));
-      fold(tail);
+      const me = P.projects.find((x) => x.id === new URLSearchParams(location.search).get("p"));
+      const sum = String((me && me.insights && me.insights.summary) || "").split(/(?<=[.?!])\s+/).filter((x) => x && !/how-might-we/i.test(x)).join(" ");
+      if (sum) { const pe = document.createElement("p"); pe.className = "glance"; pe.innerHTML = t(sum); fnd.appendChild(pe); }
       ins.remove();
       foldList(document.querySelector("#findings ul.insights"), 3);
       foldList(document.querySelector("#impact ol.strikes"), 3);
