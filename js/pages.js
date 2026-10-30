@@ -455,6 +455,10 @@
       };
       const designBody = isResearch ? "" : (() => {
         const ex = p.execution || {};
+        if (p.id === "milk-and-froth" && ex.decisions) {
+          // keep the four strongest decisions; the palette and error-page cards live in the interview notes
+          ex.decisions = ex.decisions.filter((d) => !/palette inspired|error page/i.test(d.title));
+        }
         if (p.id === "crown-code" && ex.designs) {
           // keep the strongest screens; the rest live in the interview notes
           ex.designs = ex.designs.map((d) => (/sharing/i.test(d.label) ? { ...d, images: d.images.filter((i) => /share-journey/.test(i.src)) } : d));
