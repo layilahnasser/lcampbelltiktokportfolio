@@ -465,7 +465,7 @@
           const shared = ex.designs.flatMap((d) => (/sharing/i.test(d.label) ? d.images.filter((i) => /share-journey/.test(i.src)) : []));
           ex.designs = ex.designs.filter((d) => !/sharing/i.test(d.label)).map((d, i) => (i === 0 ? { ...d, images: [...d.images, ...shared] } : d));
           ex.darkScreens = (ex.darkScreens || []).filter((x, i) => [0, 3, 4].includes(i));
-          ex.screenReasons = (ex.screenReasons || []).filter((r) => !["Profile", "Submitted for Review", "Email notifications"].includes(r.screen));
+          ex.screenReasons = []; // per-screen reasons live in the interview notes
         }
         const goalCards = p.define.goalCards || [];
         const rIters = p.iterations || [];
