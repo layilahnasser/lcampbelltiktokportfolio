@@ -1082,3 +1082,22 @@ h1 { text-shadow: -2px 0 var(--tt-cyan), 2px 0 var(--tt-red) !important; }
 @media (max-width: 1099px) { .fstrip-nav .fn { display: flex; flex-direction: column; align-items: center; gap: 0; padding: 8px 0 2px; font-size: .7rem; } .fs { display: block; font-size: .62rem; font-weight: 600; letter-spacing: 0; text-transform: none; } .fl { display: none !important; } }
 .sidetl { display: none; list-style: none; margin: 0; padding: 0; }
 .fcell { min-width: 0; }
+
+/* thin sticky bar on small screens */
+.tb { display: none; }
+@media (max-width: 700px) {
+  .fstrip-nav { display: none !important; }
+  .tb { display: block; position: sticky; top: var(--tb-top, 64px); z-index: 30; margin: 0 0 14px; background: var(--bg, #fff); border-bottom: 1px solid var(--bd); box-shadow: 0 4px 12px rgba(0,0,0,.08); transition: transform .2s; }
+  .tb--away { transform: translateY(-110%); }
+  .tb-b { all: unset; box-sizing: border-box; width: 100%; min-height: 44px; display: flex; align-items: center; gap: 10px; padding: 0 16px; cursor: pointer; font-weight: 700; font-size: .95rem; color: var(--strong); }
+  .tb-b:focus-visible, .tb-l a:focus-visible { outline: 3px solid var(--cyan); outline-offset: -3px; }
+  .tb-c { font-weight: 600; color: var(--muted); }
+  .tb-v { margin-left: auto; width: 10px; height: 10px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); margin-top: -4px; }
+  .tb-b[aria-expanded="true"] .tb-v { transform: rotate(225deg); margin-top: 4px; }
+  .tb-l { list-style: none; margin: 0; padding: 6px 8px 10px; background: var(--bg, #fff); } .tb-l[hidden] { display: none; }
+  .tb-l a { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 8px; text-decoration: none; color: var(--soft-2, var(--strong)); font-weight: 600; font-size: 1rem; }
+  .tb-x { width: 20px; height: 20px; box-sizing: border-box; border: 2px solid var(--muted); border-radius: 5px; display: grid; place-items: center; font: 800 13px/1 inherit; color: #000; }
+  .tb-l li[data-state="done"] .tb-x { background: var(--cyan); border-color: var(--cyan); } .tb-l li[data-state="done"] .tb-x::before { content: "\2713"; }
+  .tb-l li[data-state="now"] a { font-weight: 800; color: var(--strong); } .tb-l li[data-state="now"] .tb-x { border-color: var(--cyan); background: radial-gradient(circle, var(--cyan) 0 4px, transparent 5px); }
+}
+@media (prefers-reduced-motion: reduce) { .tb { transition: none; } }

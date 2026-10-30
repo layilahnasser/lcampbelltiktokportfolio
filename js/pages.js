@@ -738,11 +738,27 @@
     side.innerHTML = links.map((l) => `<li data-state="todo"><a href="${l.getAttribute("href")}">${l.querySelector(".fl").textContent.trim()}</a></li>`).join("");
     sideNav.appendChild(side); document.body.appendChild(sideNav);
     const sideItems = [...side.children];
+    const tb = document.createElement("nav"); tb.className = "tb"; tb.setAttribute("aria-label", "Jump to a section");
+    tb.innerHTML = `<button type="button" class="tb-b" aria-expanded="false" aria-controls="tb-l"><span class="tb-t"></span><span class="tb-c"></span><span class="tb-v" aria-hidden="true"></span></button><ol class="tb-l" id="tb-l" hidden>${links.map((l) => `<li data-state="todo"><a href="${l.getAttribute("href")}"><span class="tb-x" aria-hidden="true"></span>${l.querySelector(".fl").textContent.trim()}</a></li>`).join("")}</ol>`;
+    const firstFrame = document.querySelector(".frame"); firstFrame.parentElement.insertBefore(tb, firstFrame);
+    const tbBtn = tb.querySelector(".tb-b"), tbList = tb.querySelector(".tb-l"), tbItems = [...tbList.children];
+    const tbClose = () => { tbList.hidden = true; tbBtn.setAttribute("aria-expanded", "false"); };
+    tbBtn.addEventListener("click", (e) => { e.stopPropagation(); tbList.hidden = !tbList.hidden; tbBtn.setAttribute("aria-expanded", String(!tbList.hidden)); });
+    tbList.addEventListener("click", tbClose);
+    document.addEventListener("click", (e) => { if (!tb.contains(e.target)) tbClose(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !tbList.hidden) { tbClose(); tbBtn.focus(); } });
+    const hdr = document.getElementById("hud") || document.querySelector("header");
+    const setTop = () => { const h = hdr ? hdr.getBoundingClientRect() : null; document.documentElement.style.setProperty("--tb-top", (h && getComputedStyle(hdr).position !== "static" ? Math.max(0, Math.round(h.bottom)) : 0) + "px"); };
+    setTop(); addEventListener("resize", setTop);
+    let lastY = scrollY;
+    addEventListener("scroll", () => { const y = scrollY; if (tbList.hidden) tb.classList.toggle("tb--away", y > lastY + 4 && y > 300); else tb.classList.remove("tb--away"); if (Math.abs(y - lastY) > 4) lastY = y; }, { passive: true });
     const frames = [...document.querySelectorAll(".frame")];
     const paint = (cur) => {
       links.forEach((l, i) => {
         const state = i < cur ? "done" : i === cur ? "now" : "todo";
         l.parentElement.dataset.state = state;
+        if (tbItems[i]) tbItems[i].dataset.state = state;
+        if (state === "now") { tb.querySelector(".tb-t").textContent = `${i + 1} of ${links.length}`; tb.querySelector(".tb-c").textContent = "\u00b7 " + l.querySelector(".fl").textContent.trim(); }
         if (sideItems[i]) { sideItems[i].dataset.state = state; if (state === "now") sideItems[i].firstElementChild.setAttribute("aria-current", "true"); else sideItems[i].firstElementChild.removeAttribute("aria-current"); }
         l.querySelector(".fstate").textContent = state === "done" ? " (completed)" : state === "now" ? " (current)" : "";
         if (state === "now") l.setAttribute("aria-current", "true");
