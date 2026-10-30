@@ -358,6 +358,18 @@
         const list = !x ? [] : Array.isArray(x) ? x : [x];
         return list.length ? `<div class="glance-grid glance-grid--${Math.min(list.length, 3)}">${list.map((i) => img(i, "")).join("")}</div>` : "";
       };
+      const ART_LABELS = { "root-desk-report": "Desk research report", "root-benchmark": "Competitor benchmark", "root-data": "Data review", "root-stakeholder-notes": "Stakeholder notes", "root-test-plan": "Research plan", "root-ideas": "Idea clusters", "root-prioritization": "Prioritization", "usda-methods": "Five methods", "usda-interview-guide": "Interview guide", "usda-consent": "Consent form", "usda-survey": "Survey", "usda-heuristic-sheet": "Heuristic workbook", "usda-annotated": "Annotated portal", "usda-interaction": "Interaction map", "usda-testmethods": "Usability test", "elevated-process": "Research process", "elevated-interviews": "Interviews", "elevated-competitor": "Competitor analysis", "elevated-affinity": "Affinity wall", "elevated-pugh": "Prioritization" };
+      const artifacts = (x, pid) => {
+        const list = (!x ? [] : Array.isArray(x) ? x : [x]).filter((i) => i && i.src);
+        if (!list.length) return "";
+        const lab = (i, k) => ART_LABELS[String(i.src).split("/").pop().replace(/\.\w+$/, "")] || `Artifact ${k + 1}`;
+        return `<p class="art-lead"><b>Working artifacts</b> <span>Pick one to view</span></p>
+          <div class="art-tabs" role="tablist" aria-label="Working artifacts">${list.map((i, k) => `<button type="button" role="tab" id="at-${pid}-${k}" aria-controls="ap-${pid}" aria-selected="${k === 0}" tabindex="${k === 0 ? 0 : -1}">${esc(lab(i, k))}</button>`).join("")}</div>
+          <div class="art-panel" id="ap-${pid}" role="tabpanel" aria-labelledby="at-${pid}-0">
+            ${list.map((i, k) => `<div class="art-slide"${k ? " hidden" : ""}>${img(i, "")}</div>`).join("")}
+            <div class="art-ctl"><span class="art-hint">Click the image to enlarge.</span><div class="art-nav"><button type="button" class="art-pv" aria-label="Previous artifact">‹</button><span class="art-ct" aria-live="polite">1 of ${list.length}</span><button type="button" class="art-nx" aria-label="Next artifact">›</button></div></div>
+          </div>`;
+      };
       const researchBody = isResearch
         ? (() => {
             const rec = p.recommendations || {};
@@ -384,8 +396,7 @@
               <section id="methods" class="frame">
                 ${frameHead(3, FRAMES[2].label)}
                 <p class="glance">${t(first(p.methods.summary))}</p>
-                ${chips(p.methods.items.map((m) => m.name))}
-                ${grid(p.methods.image)}
+                ${artifacts(p.methods.image, p.id)}
                 ${more(`<div class="method-grid">${p.methods.items.map((m) => `<div class="method"><h3>${t(m.name)}</h3><p>${t(m.detail)}</p></div>`).join("")}</div>`)}
               </section>
 
@@ -690,6 +701,21 @@
         [...strip.querySelectorAll(".fn")].forEach((fn, i) => { fn.firstChild.textContent = String(i + 1); });
       }
     }
+    document.querySelectorAll(".art-panel").forEach((panel) => {
+      const tabs = [...document.querySelectorAll(`[aria-controls="${panel.id}"]`)], slides = [...panel.querySelectorAll(".art-slide")], ct = panel.querySelector(".art-ct");
+      let cur = 0;
+      const sel = (i, focus) => {
+        cur = (i + tabs.length) % tabs.length;
+        tabs.forEach((b, j) => { b.setAttribute("aria-selected", String(j === cur)); b.tabIndex = j === cur ? 0 : -1; });
+        slides.forEach((sl, j) => { sl.hidden = j !== cur; });
+        panel.setAttribute("aria-labelledby", tabs[cur].id); ct.textContent = `${cur + 1} of ${tabs.length}`;
+        if (focus) tabs[cur].focus();
+      };
+      tabs.forEach((b, j) => b.addEventListener("click", () => sel(j)));
+      tabs[0].parentElement.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") { e.preventDefault(); sel(cur + 1, true); } else if (e.key === "ArrowLeft") { e.preventDefault(); sel(cur - 1, true); } });
+      panel.querySelector(".art-pv").addEventListener("click", () => sel(cur - 1));
+      panel.querySelector(".art-nx").addEventListener("click", () => sel(cur + 1));
+    });
     // Make the details easy to find: say what is inside, open the process frames, and offer expand/collapse all.
     const hints = { problem: "how I identified it and the goal", research: "every method and the key insights", methods: "every method and why I chose it", define: "who we designed for and what it means", ideate: "the thinking behind the wireframes", iterate: "each round, what changed and how I checked it", execution: "the full build notes", objectives: "the full objectives and questions", findings: "the full findings and evidence", insights: "the patterns and what they mean", recommendations: "the full recommendations and evidence", impact: "the decisions this influenced and my reflection" };
     const open = new Set();
