@@ -465,7 +465,7 @@
               <section id="problem" class="frame">
                 ${frameHead(1, FRAMES[0].label)}
                 <p class="callout">${t(p.problem.statement)}</p>
-                ${p.problem.contribution ? `<div class="contrib"><b>My contribution</b><p>${t(p.problem.contribution)}</p></div>` : ""}
+                ${p.problem.contribution && p.id !== "crown-code" ? `<div class="contrib"><b>My contribution</b><p>${t(p.problem.contribution)}</p></div>` : ""}
                 ${more(`<h3>How I identified it</h3><p>${t(p.problem.context)}</p><h3>Goal</h3><p>${t(p.problem.goal)}</p>`)}
               </section>
 
