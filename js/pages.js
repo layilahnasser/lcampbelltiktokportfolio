@@ -385,6 +385,7 @@
               <section id="problem" class="frame">
                 ${frameHead(1, FRAMES[0].label)}
                 <p class="callout"><span class="callout-label">Research question</span>${t(p.problem.statement)}</p>
+                ${p.problem.opener ? `<p class="glance">${t(p.problem.opener)}</p>` : ""}
                 ${more(`<h3>Context</h3><p>${t(p.problem.context)}</p>${p.problem.challenge ? `<h3>The challenge</h3><p>${t(p.problem.challenge)}</p>` : ""}<h3>My role</h3><p>${t(p.problem.role)}</p>`)}
               </section>
 

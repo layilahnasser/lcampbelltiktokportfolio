@@ -893,6 +893,7 @@ window.PORTFOLIO = {
 
       problem: {
         statement: "How might Instructure better support learners pursuing bootcamps, micro-credentials, and self-directed learning to build skills and improve their career opportunities?",
+        opener: "Our project explored how Instructure could support learning beyond traditional academic pathways, including clearer learning roadmaps, soft-skill development, and ways to communicate skills to employers. I was the only UX researcher on a four-person interdisciplinary team, and I led research planning, interview protocol development, interviews, and affinity analysis.",
         context: "Our project explored how Instructure could support learning beyond traditional academic pathways. We examined the needs of alternative-pathway learners, including clearer learning roadmaps, soft-skill development, and ways to communicate their skills to employers.",
         challenge: "Understand the barriers these learners face and translate the findings into actionable product recommendations aligned with Instructure’s strategy.",
         role: "As the only UX researcher on a four-person interdisciplinary team, I led research planning, interview protocol development, interviews, and affinity analysis. I also helped translate our findings into recommendations and present the team’s work."
@@ -906,7 +907,7 @@ window.PORTFOLIO = {
         ]
       },
       methods: {
-        summary: "A five-step research process: background research, a live project plan, recruitment and interviews, qualitative analysis, then recommendations.",
+        summary: "A five-step research process: background research, a live project plan, recruitment and interviews, qualitative analysis, then recommendations. I ran 10 semi-structured interviews with alternative-pathway learners, HR professionals, and an Instructure partner, and after feedback that our first two learner interviews shared one cultural context, we added an American participant.",
         items: [
           { name: "Background research", detail: "Identified core problems, scanned the market (including D2L Brightspace and Coursera) and found gaps in Instructure’s ecosystem." },
           { name: "Live project plan", detail: "Defined context, stakeholders, methods, and outputs, and divided tasks across the team." },
@@ -956,7 +957,7 @@ window.PORTFOLIO = {
         ]
       },
       recommendations: {
-        summary: "Three recommendations, each aimed at one pain point and shown as a prototype I built in Figma Make.",
+        summary: "Three recommendations, each aimed at one pain point and shown as a prototype I built in Figma Make: a personalized modular learning platform, a skill tree roadmap, and a soft-skill development tool.",
         map: {
           heading: "From research to recommendation",
           rows: [
