@@ -436,9 +436,7 @@
         const one = (im) => (im && (im.src || im.video || im.embed) ? img(im) : "");
         return `<div class="ds">
           ${ds.intro ? `<p class="glance">${t(ds.intro)}</p>` : ""}
-          ${sec("Brand colors", "", ds.brand ? brandBlock(ds.brand, ds.typefaces) : "")}
-          ${sec("Color system", "primitives and semantic tokens", one(ds.colorImage))}
-          ${sec("Typography", "tap to open full size", ds.typography && (ds.typography.src) ? `<div class="ds-type">${img(ds.typography)}</div>` : "")}
+          ${sec("Colors and typography", "", ds.brand || ds.colorImage || ds.typography ? `${ds.brand ? `<ul class="sws" aria-label="Brand colors">${ds.brand.map((c) => `<li style="--sw:${esc(c.hex)};--on:${(lum(c.hex) + 0.05) / 0.05 >= 1.05 / (lum(c.hex) + 0.05) ? "#0d0a14" : "#fff"}"><b>${esc(c.name)}</b><small>${esc(c.hex)}</small></li>`).join("")}</ul>` : ""}${(ds.typefaces || []).length ? `<p class="tf">Typefaces: ${ds.typefaces.map((f) => `<b>${esc(f.name)}</b> (${esc(f.role.replace(/ typeface/i, "")).toLowerCase()})`).join(" and ")}</p>` : ""}<div class="ct">${one(ds.colorImage)}${ds.typography && ds.typography.src ? `<div class="ds-type">${img(ds.typography)}</div>` : ""}</div>` : "")}
           ${sec("Buttons", "", one(ds.buttons))}
           ${sec("Components", "", one(ds.components))}
         </div>`;
