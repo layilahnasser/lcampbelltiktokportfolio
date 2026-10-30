@@ -377,7 +377,7 @@
             const mapRows = (rec.map && rec.map.rows) || [];
             const designs = (rec.designs || []).map((d) => {
               const row = mapRows.find((r) => r.tag === d.label);
-              return `<figure class="concept"><div class="concept-img">${imgs(d.images)}</div><figcaption>${row ? `<span class="heard">${t(first(row.need))}</span>` : ""}<strong>${esc(d.label)}</strong></figcaption></figure>`;
+              return `<figure class="concept"><h3 class="concept-t">${esc(d.label)}</h3><div class="concept-img">${imgs(d.images)}</div>${row ? `<figcaption><span class="heard">${t(first(row.need))}</span></figcaption>` : ""}</figure>`;
             });
             const decisions = imp.decisions || [];
             return `

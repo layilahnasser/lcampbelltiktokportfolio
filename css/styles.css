@@ -1066,3 +1066,6 @@ h1 { text-shadow: -2px 0 var(--tt-cyan), 2px 0 var(--tt-red) !important; }
 .art-nav { display: flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 999px; padding: 2px; background: var(--panel); } .art-nav button { all: unset; cursor: pointer; width: 44px; height: 40px; display: grid; place-items: center; border-radius: 999px; font-weight: 700; font-size: 1.5rem; color: var(--strong); } .art-nav button:hover { background: var(--line); }
 .art-ct { min-width: 56px; text-align: center; font-weight: 700; font-size: .9rem; color: var(--strong); }
 @media (max-width: 700px) { .art-slide .shot img { max-height: 320px; } .art-ctl { flex-wrap: wrap; } }
+
+.concept-t { margin: 0; padding: 12px 14px 4px; font-size: 1.02rem; line-height: 1.3; font-weight: 800; }
+.concept-t { font-family: inherit; color: var(--strong); }
