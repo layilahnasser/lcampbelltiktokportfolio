@@ -352,7 +352,7 @@
       const first = (x) => String(x || "").split(/(?<=[.?!])\s+/)[0];
       const rest = (x) => String(x || "").split(/(?<=[.?!])\s+/).slice(1).join(" ");
       const rp = (x) => (rest(x) ? `<p>${t(rest(x))}</p>` : "");
-      const more = (html) => (html.trim() ? `<details class="more"><summary>Read the details</summary><div class="more-body">${html}</div></details>` : "");
+      const more = () => ""; // details live in interview notes, not on the page
       const chips = (arr) => ((arr || []).length ? `<ul class="chips" role="list">${arr.map((c) => `<li class="chip">${t(c)}</li>`).join("")}</ul>` : "");
       const grid = (x) => {
         const list = !x ? [] : Array.isArray(x) ? x : [x];
@@ -662,37 +662,29 @@
   }
 
   if (page === "project") {
-    // Research case studies: fold seven steps into five and tuck long evidence under "Show more" folds.
-    const fold = (nodes, label) => {
-      nodes = nodes.filter(Boolean); if (!nodes.length) return null;
-      const d = document.createElement("details"); d.className = "more fold";
-      const sm = document.createElement("summary"); sm.textContent = label;
-      const body = document.createElement("div"); body.className = "more-body";
-      nodes[0].before(d); d.append(sm, body); nodes.forEach((n) => body.appendChild(n)); return d;
-    };
-    const foldList = (list, keep, noun) => {
+    // Research case studies: five steps instead of seven; extra evidence stays out of the page.
+    const fold = (nodes) => { nodes.filter(Boolean).forEach((n) => n.remove()); };
+    const foldList = (list, keep) => {
       if (!list || list.children.length <= keep) return;
-      const extra = document.createElement(list.tagName); extra.className = list.className;
-      [...list.children].slice(keep).forEach((li) => extra.appendChild(li));
-      list.after(extra); fold([extra], `Show ${extra.children.length} more ${extra.children.length === 1 ? noun.replace(/s$/, "") : noun}`);
+      [...list.children].slice(keep).forEach((li) => li.remove());
     };
     const byId = (id) => document.getElementById(id);
     if (byId("objectives") && byId("insights")) {
       const prob = byId("problem"), obj = byId("objectives"), fnd = byId("findings"), ins = byId("insights");
       const grid = obj.querySelector(".obj-grid");
       [...obj.children].filter((c) => !c.classList.contains("frame-head")).forEach((c) => prob.appendChild(c));
-      fold([grid], "The research questions");
+      fold([grid]);
       obj.remove();
       const figs = [...document.querySelectorAll("#methods figure")];
-      if (figs.length > 2) fold(figs.slice(2), `See ${figs.length - 2} more working artifacts`);
+      if (figs.length > 2) fold(figs.slice(2));
       const h = document.createElement("h3"); h.className = "fold-h"; h.textContent = "What it meant"; fnd.appendChild(h);
       const rest = [...ins.children].filter((c) => !c.classList.contains("frame-head"));
       rest.forEach((c) => fnd.appendChild(c));
       const tail = rest.filter((c) => !c.classList.contains("glance") && !c.classList.contains("chips"));
-      fold(tail, "The patterns, how-might-we questions, and the evidence behind them");
+      fold(tail);
       ins.remove();
-      foldList(document.querySelector("#findings ul.insights"), 3, "findings");
-      foldList(document.querySelector("#impact ol.strikes"), 3, "outcomes");
+      foldList(document.querySelector("#findings ul.insights"), 3);
+      foldList(document.querySelector("#impact ol.strikes"), 3);
       document.querySelectorAll(".frame-head .frame-no").forEach((el, i) => { el.textContent = "Step " + (i + 1); });
       const strip = document.querySelector(".fstrip");
       if (strip) {
