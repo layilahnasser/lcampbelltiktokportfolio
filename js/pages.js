@@ -669,10 +669,7 @@
     const byId = (id) => document.getElementById(id);
     if (byId("objectives") && byId("insights")) {
       const prob = byId("problem"), obj = byId("objectives"), fnd = byId("findings"), ins = byId("insights");
-      const grid = obj.querySelector(".obj-grid");
-      [...obj.children].filter((c) => !c.classList.contains("frame-head")).forEach((c) => prob.appendChild(c));
-      fold([grid]);
-      obj.remove();
+      obj.remove(); // objectives repeat the research question and the summary cards; kept in interview notes
       const figs = [...document.querySelectorAll("#methods figure")];
       if (figs.length > 2) fold(figs.slice(2));
       const h = document.createElement("h3"); h.className = "fold-h"; h.textContent = "What it meant"; fnd.appendChild(h);
