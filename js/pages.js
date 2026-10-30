@@ -669,7 +669,9 @@
     const byId = (id) => document.getElementById(id);
     if (byId("objectives") && byId("insights")) {
       const prob = byId("problem"), obj = byId("objectives"), fnd = byId("findings"), ins = byId("insights");
-      obj.remove(); // objectives repeat the research question and the summary cards; kept in interview notes
+      const grid = obj.querySelector(".obj-grid");
+      if (grid) { const gh = document.createElement("h3"); gh.className = "fold-h"; gh.textContent = "What I set out to learn"; prob.append(gh, grid); }
+      obj.remove();
       const figs = [...document.querySelectorAll("#methods figure")];
       if (figs.length > 2) fold(figs.slice(2));
       const h = document.createElement("h3"); h.className = "fold-h"; h.textContent = "What it meant"; fnd.appendChild(h);
