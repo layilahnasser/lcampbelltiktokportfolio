@@ -1069,3 +1069,16 @@ h1 { text-shadow: -2px 0 var(--tt-cyan), 2px 0 var(--tt-red) !important; }
 
 .concept-t { margin: 0; padding: 12px 14px 4px; font-size: 1.02rem; line-height: 1.3; font-weight: 800; }
 .concept-t { font-family: inherit; color: var(--strong); }
+
+/* case-study progress: boxes that fill in, short names on phones, sidebar on wide screens */
+.fprog { display: none !important; }
+.fstrip { overflow: visible !important; box-shadow: none; }
+.fcell:first-child { border-radius: 12px 0 0 12px; } .fcell:last-child { border-radius: 0 12px 12px 0; }
+.fcell[data-state] .fm { height: 40px; }
+.fcell .fm::before { content: "" !important; display: block !important; width: 20px; height: 20px; box-sizing: border-box; border: 2px solid var(--muted); border-radius: 5px; background: var(--panel, #fff); font-size: 14px; line-height: 16px; text-align: center; text-shadow: none !important; }
+.fcell[data-state="done"] .fm::before { content: "\2713" !important; background: var(--cyan); border-color: var(--cyan); color: #000 !important; font-weight: 800; }
+.fcell[data-state="now"] .fm::before { background: radial-gradient(circle, var(--cyan) 0 4px, #fff 5px) !important; border-color: #fff; }
+.fs { display: none; }
+@media (max-width: 1099px) { .fstrip-nav .fn { display: flex; flex-direction: column; align-items: center; gap: 0; padding: 8px 0 2px; font-size: .7rem; } .fs { display: block; font-size: .62rem; font-weight: 600; letter-spacing: 0; text-transform: none; } .fl { display: none !important; } }
+.sidetl { display: none; list-style: none; margin: 0; padding: 0; }
+.fcell { min-width: 0; }

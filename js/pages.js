@@ -546,7 +546,7 @@
           </header>
 
           <nav class="fstrip-nav" aria-label="Case study frames">
-            <ol class="fstrip">${FRAMES.map((f, i) => `<li class="fcell"><a href="#${f.key}" data-frame="${f.key}"><span class="fn">${i + 1}<span class="fl"> ${f.label}</span></span><span class="fm" aria-hidden="true"></span><span class="sr-only fstate"></span></a></li>`).join("")}</ol>
+            <ol class="fstrip">${FRAMES.map((f, i) => `<li class="fcell"><a href="#${f.key}" data-frame="${f.key}"><span class="fn">${i + 1}<span class="fl"> ${f.label}</span><span class="fs" aria-hidden="true">${({ "Design Goals": "Goals", Wireframes: "Wires", "Design System": "System", "Final Design": "Final", Reflection: "Reflect", Recommendations: "Recs" })[f.label] || f.label}</span></span><span class="fm" aria-hidden="true"></span><span class="sr-only fstate"></span></a></li>`).join("")}</ol>
           </nav>
 
           <div class="case-layout">
@@ -733,11 +733,17 @@
       all.textContent = on ? "Close all details" : "Open all details";
     });
     const links = [...document.querySelectorAll(".fstrip a")];
+    const sideNav = document.createElement("nav"); sideNav.setAttribute("aria-label", "Case study sections");
+    const side = document.createElement("ol"); side.className = "sidetl";
+    side.innerHTML = links.map((l) => `<li data-state="todo"><a href="${l.getAttribute("href")}">${l.querySelector(".fl").textContent.trim()}</a></li>`).join("");
+    sideNav.appendChild(side); document.body.appendChild(sideNav);
+    const sideItems = [...side.children];
     const frames = [...document.querySelectorAll(".frame")];
     const paint = (cur) => {
       links.forEach((l, i) => {
         const state = i < cur ? "done" : i === cur ? "now" : "todo";
         l.parentElement.dataset.state = state;
+        if (sideItems[i]) { sideItems[i].dataset.state = state; if (state === "now") sideItems[i].firstElementChild.setAttribute("aria-current", "true"); else sideItems[i].firstElementChild.removeAttribute("aria-current"); }
         l.querySelector(".fstate").textContent = state === "done" ? " (completed)" : state === "now" ? " (current)" : "";
         if (state === "now") l.setAttribute("aria-current", "true");
         else l.removeAttribute("aria-current");
