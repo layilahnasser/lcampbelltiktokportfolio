@@ -454,6 +454,12 @@
       };
       const designBody = isResearch ? "" : (() => {
         const ex = p.execution || {};
+        if (p.id === "crown-code" && ex.designs) {
+          // keep the strongest screens; the rest live in the interview notes
+          ex.designs = ex.designs.map((d) => (/sharing/i.test(d.label) ? { ...d, images: d.images.filter((i) => /share-journey/.test(i.src)) } : d));
+          ex.darkScreens = (ex.darkScreens || []).filter((x, i) => [0, 3, 4].includes(i));
+          ex.screenReasons = (ex.screenReasons || []).filter((r) => !["Profile", "Submitted for Review", "Email notifications"].includes(r.screen));
+        }
         const goalCards = p.define.goalCards || [];
         const rIters = p.iterations || [];
         const iterImgs = rIters.flatMap((it) => (Array.isArray(it.image) ? it.image : it.image ? [it.image] : [])).filter((i) => i && (i.src || i.video || i.embed));
