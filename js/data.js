@@ -96,10 +96,8 @@ window.PORTFOLIO = {
     // Frame 2
     toolsHeading: "How I turn insight into product direction",
     tools: [
-      "Figma", "Miro", "Adobe Photoshop",
-      "Claude", "ChatGPT", "Copilot", "Gemini", "Claude Code",
-      "VS Code", "Python", "R", "HTML", "CSS",
-      "NVivo", "Lookback", "User Interviews"
+      "Figma", "Figma Make", "Miro", "Claude Code",
+      "Lookback", "NVivo", "Python", "User Interviews"
     ],
     capabilities: [
       {
@@ -136,17 +134,6 @@ window.PORTFOLIO = {
     ],
 
     // Bonus frame
-    accessNote: {
-      title: "Built to be accessible",
-      text: "As a UX researcher and designer, I treat accessibility as part of the work, so I built this portfolio to meet WCAG 2.1 AA.",
-      points: [
-        "Automated testing with axe on every page, with no violations.",
-        "Color contrast checked against AA targets, including text on every background.",
-        "Works with a keyboard alone, with a skip link and visible focus.",
-        "Every image has a description for screen readers.",
-        "Respects reduced-motion settings, and works on phones as small as 320 pixels wide."
-      ]
-    },
     moreHeading: "A little more about me",
     more: [
       {
