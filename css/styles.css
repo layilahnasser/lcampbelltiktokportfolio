@@ -1101,3 +1101,4 @@ h1 { text-shadow: -2px 0 var(--tt-cyan), 2px 0 var(--tt-red) !important; }
   .tb-l li[data-state="now"] a { font-weight: 800; color: var(--strong); } .tb-l li[data-state="now"] .tb-x { border-color: var(--cyan); background: radial-gradient(circle, var(--cyan) 0 4px, transparent 5px); }
 }
 @media (prefers-reduced-motion: reduce) { .tb { transition: none; } }
+.comp-table caption { padding: 12px 0 8px 18px; }
