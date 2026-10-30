@@ -427,6 +427,7 @@
 
               <section id="impact" class="frame">
                 ${frameHead(7, FRAMES[6].label)}
+                ${imp.opener ? `<p class="glance">${t(imp.opener)}</p>` : ""}
                 <div class="results">${(imp.results || []).map((r) => `<div class="result"><strong>${t(r.value)}</strong><span>${esc(r.label)}</span></div>`).join("")}</div>
                 ${decisions.length ? `<h3 class="strikes-h">${esc(imp.decisionsHeading || "Decisions influenced")}</h3><ol class="strikes">${decisions.map((d, i) => `<li class="strike"><span class="strike-x" aria-hidden="true">✓</span><div class="strike-tx"><span class="strike-n">Outcome ${i + 1}</span><h4>${t(d.title)}</h4><p>${t(d.statement || first(d.why))}</p></div></li>`).join("")}</ol>` : ""}
                 ${grid(imp.image)}

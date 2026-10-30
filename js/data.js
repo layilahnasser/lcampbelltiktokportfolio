@@ -795,7 +795,7 @@ window.PORTFOLIO = {
         ]
       },
       findings: {
-        summary: "Three patterns held across every method. Each finding below came from at least three of them.",
+        summary: "Three patterns held across the methods: search fails on imperfect input, help is disconnected from the task, and small inconsistencies misplace trust. Each finding came from at least three of them.",
         items: [
           "Search fails on imperfect input. Heuristic evaluators rated it severity 4 of 4, and it appeared in every method. Autocomplete dropped out on full names and there was no country-only search.",
           "Help is disconnected from the task. Help lives across the Help page, the Videos and Guides Hub, the glossary, and manuals. One participant called cross-referencing “taxing.”",
@@ -854,6 +854,7 @@ window.PORTFOLIO = {
                 image: [
           { src: "assets/img/usda-banner.jpg", fit: "wide", caption: "New features now live on the ACIR portal: a Reports page for data export, embedded procedure search on each manual page, a reworked procedure search page, and a taxonomic group notes field." }
         ],
+        opener: "The research reached USDA APHIS directly: the full report, with the evidence for every method, went to the team, and we met weekly with stakeholders as findings emerged. New features in areas our study examined, including embedded procedure search on each manual page, are now live on the ACIR portal.",
         decisionsHeading: "Where the research went",
         decisions: [
           { title: "New features live on the ACIR portal", statement: "The portal now has embedded procedure search on each manual page and a taxonomic group notes field, both in areas our study examined.", why: "The ACIR portal’s “New ACIR Features” announcement lists a Reports page for data export, embedded procedure search on each manual page, a reworked procedure search page, and a new taxonomic group notes field. Cross-referencing between manuals and documents, and finding taxonomy information, were two of the problem areas our usability tests and heuristic evaluation looked at." },
@@ -978,6 +979,7 @@ window.PORTFOLIO = {
         ],
         imageCaption: "Presenting our product recommendation to stakeholders and 180+ attendees in our lecture hall.",
         quote: { text: "Your team delivered one of the strongest, most future-focused strategies we’ve seen.", source: "Instructure’s client consultant" },
+        opener: "The strategy reached Instructure’s full strategy team and over 180 University of Michigan students. Instructure’s client consultant called it one of the strongest, most future-focused strategies they had seen, and flagged two constraints to plan for: content partnerships for the modular platform, and how to measure soft skills.",
         decisionsHeading: "Where the research reached people",
         decisions: [
           { title: "Presented to Instructure’s strategy team", why: "Presented the final strategy and the Figma Make prototype to Instructure’s full strategy team, and to over 180 University of Michigan students, to drive alignment with Instructure’s long-term strategic goals." },
