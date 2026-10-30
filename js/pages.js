@@ -547,7 +547,7 @@
               </div>
             </div>
             
-            ${p.glance ? `<ul class="glance-boxes" aria-label="Case study at a glance">${[["Problem", p.glance.problem], ["What I did", p.glance.did], ["What changed", p.glance.changed]].map(([k, v]) => `<li><b>${k}</b><span>${t(v)}</span></li>`).join("")}</ul>` : ""}
+            ${p.glance ? `<ul class="glance-boxes${p.id === "crown-code" ? " glance-boxes--2" : ""}" aria-label="Case study at a glance">${[["Problem", p.glance.problem], ["What I did", p.glance.did], ["What changed", p.glance.changed]].filter(([k]) => !(p.id === "crown-code" && k === "Problem")).map(([k, v]) => `<li><b>${k}</b><span>${t(v)}</span></li>`).join("")}</ul>` : ""}
             ${img(p.hero, "shot--hero" + (p.hero && p.hero.fit === "phone" ? " shot--phone" : ""))}
           </header>
 
