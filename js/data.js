@@ -613,7 +613,7 @@ window.PORTFOLIO = {
       },
 
       designSystem: {
-        intro: "Built from the ground up: the brand’s colors and type first, then the components the screens are built from.",
+        intro: "I built this design system solo in Figma, in light and dark mode, before designing the screens: color tokens, a type scale in Manrope and Newsreader, then components like buttons, navigation, flashcards, progress, and readiness cards. Every screen that follows is built from them.",
         colorImage: { src: "assets/img/crown-color-system.jpg", fit: "wide", caption: "Color system: primitives and semantic tokens for teal, gold, success green, error red, and greyscale." },
         typography: { src: "assets/img/crown-typography.jpg", fit: "wide", alt: "Crown Code type system: Manrope for headings and labels, Newsreader for paragraphs and buttons, with sizes, line heights, and letter spacing for H1 to H6, three paragraph, button, and label sizes.", caption: "Type scale: Manrope for headings and labels, Newsreader for paragraphs and buttons." },
         components: { src: "assets/img/crown-components.jpg", fit: "wide", caption: "Component library: buttons, navigation, flashcards, progress, and readiness cards." }
