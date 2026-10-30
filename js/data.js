@@ -17,8 +17,8 @@ window.PORTFOLIO = {
     firstName: "Layilah",
     lastName: "Campbell",
     title: "UX Research & Design", // shows under your name in the neon logo
-    heroTitle: "From Big Tech Recruiting to UX.", // big cyan line on the home page
-    headline: "Seven years recruiting at Google, Adobe & Meta shaped how I understand people. Now I bring that perspective to research and design.",
+    heroTitle: "UX Researcher & Designer", // big cyan line on the home page
+    headline: "UX researcher and designer graduating from Michigan in May 2027, with seven years of recruiting at Google, Adobe & Meta behind me.",
     // Stat readouts under the home photo card. Use the word "projects" to show the live project count.
     stats: [
       { value: "7", label: "Years in tech" },
@@ -47,7 +47,7 @@ window.PORTFOLIO = {
     kicker: "Who I am",
     title: "Meet Layilah",
     pronunciation: "Lay-La",
-    lede: "After seven years connecting people with careers at some of the biggest tech companies, I now research and design the products they use. I listen first, then design.",
+    lede: "I’m completing an M.S. in UX Research & Design at the University of Michigan, graduating May 2027. Seven years in recruiting came first, and they taught me to listen before I design.",
     card: {
       header: "Hello",
       title: "Layilah Campbell",
