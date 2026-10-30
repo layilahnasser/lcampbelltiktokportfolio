@@ -139,7 +139,7 @@
                 ${me.email ? `<a class="reel-open reel-open--alt" href="mailto:${esc(me.email)}">Email me</a>` : ""}
                 ${me.linkedin ? `<a class="reel-open reel-open--alt" href="${esc(me.linkedin)}" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
               
-                <a class="reel-open reel-open--alt" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio<span class="sr-only"> (opens my standard portfolio)</span></a></div>
+                <a class="reel-open reel-open--alt" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Classic portfolio<span class="sr-only"> (opens a more traditional version of my portfolio)</span></a></div>
               <p class="intro-hint"><a href="work.html" class="end-link">Browse all work</a></p>
             </div>
           </section>

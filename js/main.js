@@ -208,7 +208,7 @@
                 `<li><a href="${n.href}" class="tt-link${n.create ? " tt-link--create" : ""}${page === n.key || (page === "project" && n.key === "work") ? " is-active" : ""}"${page === n.key ? ' aria-current="page"' : ""}><span class="tt-ico">${ICONS[n.icon]}</span><span class="tt-label">${n.label}</span></a></li>`
             ).join("")}
           </ul>
-<a class="tt-std" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio <span aria-hidden="true">↗</span></a>
+<a class="tt-std" href="https://layilahnasser.github.io/layilahcportfolio2026-/">Classic portfolio <span aria-hidden="true">↗</span></a>
         </nav>`;
     }
     const footer = document.getElementById("footer");
@@ -220,7 +220,7 @@
             ${me.email ? `<a href="mailto:${esc(me.email)}">Email</a>` : ""}
             ${me.linkedin ? `<a href="${esc(me.linkedin)}" target="_blank" rel="noopener">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>` : ""}
             <a href="resume.html">Resume</a>
-            <a href="https://layilahnasser.github.io/layilahcportfolio2026-/">Standard portfolio</a>
+            <a href="https://layilahnasser.github.io/layilahcportfolio2026-/">Classic portfolio</a>
           </p>
         </div>`;
     }
