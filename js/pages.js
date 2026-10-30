@@ -683,8 +683,6 @@
       const grid = obj.querySelector(".obj-grid");
       if (grid) { const gh = document.createElement("h3"); gh.className = "fold-h"; gh.textContent = "What I set out to learn"; prob.append(gh, grid); }
       obj.remove();
-      const figs = [...document.querySelectorAll("#methods figure")];
-      if (figs.length > 2) fold(figs.slice(2));
       const h = document.createElement("h3"); h.className = "fold-h"; h.textContent = "What it meant"; fnd.appendChild(h);
       const me = P.projects.find((x) => x.id === new URLSearchParams(location.search).get("p"));
       const sum = String((me && me.insights && me.insights.summary) || "").split(/(?<=[.?!])\s+/).filter((x) => x && !/how-might-we/i.test(x)).join(" ");
